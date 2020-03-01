@@ -1,6 +1,6 @@
 ## Flutter Clock
 
-This is a modified version of section_clock repository
+This is a modified version of section_clock repository.
 
 This is a simple clock featuring a bar on the bottom which shows how much of the hour has passed. The border color and the bar color change according to the weather.
 

@@ -121,7 +121,10 @@ class _SectionClockState extends State<SectionClock> {
           ),
         ),
         Container(
+          alignment: Alignment.topCenter,
           padding: const EdgeInsets.all(4.0),
+          height: screenHeight,
+          width: screenWidth,
           decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: colors,
@@ -145,57 +148,60 @@ class _SectionClockState extends State<SectionClock> {
                 condition: _condition,
                 location: _location,
                 screenHeight: screenHeight),
-            secondChild: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(hour, style: clockTextStyle),
-                    Text(':', style: clockTextStyle),
-                    Text(minute, style: clockTextStyle),
-                  ],
-                ),
-                SizedBox(height: screenHeight * 0.1),
-                // This stack contains the hourly progess bar
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      height: screenHeight * 0.03,
-                      width: screenWidth * 0.75,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(10.0),
+            secondChild: FittedBox(
+              alignment: Alignment.topCenter,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(hour, style: clockTextStyle),
+                      Text(':', style: clockTextStyle),
+                      Text(minute, style: clockTextStyle),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // This stack contains the hourly progess bar
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        height: screenHeight * 0.03,
+                        width: screenWidth * 0.75,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
-                    ),
-                    AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      height: screenHeight * 0.03,
-                      width: _hourSpent * screenWidth * 0.75,
-                      decoration: BoxDecoration(
-                        color: barColor(_condition),
-                        borderRadius: BorderRadius.circular(10.0),
+                      AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.linear,
+                        height: screenHeight * 0.03,
+                        width: _hourSpent * screenWidth * 0.75,
+                        decoration: BoxDecoration(
+                          color: barColor(_condition),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                // This row displays the current date and weather conditions
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(_temperature, style: detailsTextStyle),
-                    Text(' ● '),
-                    Text(weatherImage(_condition), style: detailsTextStyle),
-                    Text(' '),
-                    Text(_condition, style: detailsTextStyle),
-                    Text(' ● '),
-                    Text(fullDate, style: detailsTextStyle),
-                    Text(' ● '),
-                    Text(weekday, style: detailsTextStyle),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // This row displays the current date and weather conditions
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(_temperature, style: detailsTextStyle),
+                      Text(' ● '),
+                      Text(weatherImage(_condition), style: detailsTextStyle),
+                      Text(' '),
+                      Text(_condition, style: detailsTextStyle),
+                      Text(' ● '),
+                      Text(fullDate, style: detailsTextStyle),
+                      Text(' ● '),
+                      Text(weekday, style: detailsTextStyle),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
